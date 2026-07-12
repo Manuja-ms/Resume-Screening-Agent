@@ -1,0 +1,59 @@
+Software Engineer
+
+Location:
+Bangalore
+
+Experience:
+2-4 Years
+
+Required Skills
+
+Python
+
+Machine Learning
+
+SQL
+
+REST APIs
+
+Git
+
+Docker
+
+Cloud Computing
+
+Linux
+
+Data Structures
+
+Algorithms
+
+Responsibilities
+
+Design and develop scalable software applications.
+
+Build RESTful APIs.
+
+Develop machine learning solutions.
+
+Write clean, reusable code.
+
+Collaborate with cross-functional teams.
+
+Deploy applications using Docker.
+
+Use Git for version control.
+
+Maintain databases using SQL.
+
+Preferred Qualifications
+
+Bachelor's Degree in Computer Science.
+
+Experience with cloud platforms such as AWS or Azure.
+
+Strong communication skills.
+
+Knowledge of Agile development.
+
+Problem-solving ability.

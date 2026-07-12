@@ -1,0 +1,18 @@
+```text
+streamlit==1.49.1
+
+google-genai==0.6.15
+
+sentence-transformers==5.6.0
+torch==2.13.0
+scikit-learn==1.9.0
+
+spacy==3.8.14
+en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl
+
+pandas==3.0.3
+numpy==2.4.6
+
+PyPDF2==3.0.1
+python-docx==1.2.0
+```
