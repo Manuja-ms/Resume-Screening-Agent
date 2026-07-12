@@ -165,27 +165,32 @@ Upload:
 
 The application displays ranked candidates and allows downloading the results as CSV.
 
+## Model and NLP Approach
 
-# Scoring Method
+### Google Gemini
 
-Each candidate receives a weighted score using:
+Google Gemini was selected because it can accurately extract structured information such as skills, education, certifications, projects, and experience from resumes with different formats and writing styles. This reduces the need for complex rule-based extraction.
 
-| Component           | Weight |
-| ------------------- | ------ |
-| Semantic Similarity | 60%    |
-| Skills              | 20%    |
-| Experience          | 15%    |
-| Education           | 5%     |
+### Sentence Transformers
 
-Final Score:
+The `all-MiniLM-L6-v2` Sentence Transformer model is used to generate semantic embeddings for both the job description and resumes. Unlike keyword matching, semantic embeddings capture contextual meaning, allowing resumes with similar skills expressed using different words to be matched effectively.
 
-```
-Final Score =
-0.60 × Similarity +
-0.20 × Skills +
-0.15 × Experience +
-0.05 × Education
-```
+### Cosine Similarity
+
+Cosine similarity measures how closely the semantic embeddings of a resume and job description align. The similarity score is converted to a percentage and used as the primary ranking metric.
+
+## Scoring Method
+
+The final candidate score is computed using a weighted combination of multiple evaluation factors.
+
+| Component | Weight | Reason |
+|-----------|--------|--------|
+| Semantic Similarity | 60% | Measures overall alignment between the resume and the job description. |
+| Skills | 20% | Rewards candidates with more relevant technical skills. |
+| Experience | 15% | Gives preference to experienced candidates. |
+| Education | 5% | Considers educational qualifications while keeping practical skills more important. |
+
+These weights were chosen to prioritize semantic relevance while still considering candidate qualifications.
 
 # AI Reasoning
 
