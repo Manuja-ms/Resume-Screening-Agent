@@ -21,8 +21,6 @@ The **AI Resume Screening Agent** is an AI-powered application that automates re
 * Export results to **CSV** and **JSON**
 * Simple Streamlit web interface
 
----
-
 # Project Structure
 
 ```text
@@ -52,8 +50,6 @@ Resume-Screening-Agent/
 └── .gitignore
 ```
 
----
-
 # Installation
 
 ## 1. Clone the repository
@@ -62,8 +58,6 @@ Resume-Screening-Agent/
 git clone <repository-url>
 cd Resume-Screening-Agent
 ```
-
----
 
 ## 2. Create a Conda environment
 
@@ -76,8 +70,6 @@ Activate it:
 ```bash
 conda activate resume_agent
 ```
-
----
 
 ## 3. Install dependencies
 
@@ -97,8 +89,6 @@ Download the spaCy English model:
 python -m spacy download en_core_web_sm
 ```
 
----
-
 # Configure the Gemini API Key
 
 Open **config.py** and set your Gemini API key.
@@ -108,8 +98,6 @@ GEMINI_API_KEY = "YOUR_GEMINI_API_KEY"
 ```
 
 Alternatively, you can store the key in an environment variable and read it inside `config.py`.
-
----
 
 # Input Files
 
@@ -130,8 +118,6 @@ Place the job description in:
 ```
 data/job_description/jd.txt
 ```
-
----
 
 # Running the Application
 
@@ -158,8 +144,6 @@ Results are saved in:
 data/output/
 ```
 
----
-
 ## Option 2 – Streamlit Web Application
 
 Run:
@@ -181,7 +165,6 @@ Upload:
 
 The application displays ranked candidates and allows downloading the results as CSV.
 
----
 
 # Scoring Method
 
@@ -204,8 +187,6 @@ Final Score =
 0.05 × Education
 ```
 
----
-
 # AI Reasoning
 
 Google Gemini generates a short explanation for every candidate describing:
@@ -216,7 +197,6 @@ Google Gemini generates a short explanation for every candidate describing:
 
 This reasoning is included in the exported CSV and JSON files.
 
----
 
 # Output
 
@@ -243,8 +223,6 @@ Each candidate record contains:
 * Education
 * AI-generated reasoning
 
----
-
 # Testing
 
 The application was tested using multiple real resume examples.
@@ -264,8 +242,6 @@ The application was tested using multiple real resume examples.
 
 The system was evaluated using 5–10 resumes with different skill sets and experience levels to verify ranking accuracy and export functionality.
 
----
-
 # Design Choices
 
 ### Modular Architecture
@@ -282,25 +258,18 @@ Each responsibility is separated into an independent module:
 
 This design improves readability, maintainability, and testing.
 
----
-
 ### Semantic Matching
 
 Instead of keyword matching, the project uses Sentence Transformer embeddings to compare resumes with the job description based on semantic meaning.
-
----
 
 ### AI-based Resume Extraction
 
 Google Gemini extracts structured candidate information, reducing the need for manually written parsing rules.
 
----
-
 ### Weighted Scoring
 
 Candidate ranking combines semantic similarity with extracted information such as skills, education, and experience to provide a more balanced evaluation.
 
----
 
 # Tradeoffs and Limitations
 
@@ -311,7 +280,6 @@ Candidate ranking combines semantic similarity with extracted information such a
 * API usage requires a valid Google Gemini API key and internet connectivity.
 * OCR is not implemented for scanned PDF resumes.
 
----
 
 # Future Improvements
 
@@ -325,7 +293,6 @@ Candidate ranking combines semantic similarity with extracted information such a
 * Recruiter authentication
 * Interview recommendation module
 
----
 
 # Technologies Used
 
@@ -339,8 +306,6 @@ Candidate ranking combines semantic similarity with extracted information such a
 * NumPy
 * PyPDF2
 * python-docx
-
----
 
 # Author
 
