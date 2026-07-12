@@ -11,14 +11,12 @@ import re
 import spacy
 from google import genai
 
-from config import GEMINI_API_KEY
+from config import GEMINI_API_KEY, MODEL_NAME
 
 # -------------------------------------------------
 # Configure Gemini Client
 # -------------------------------------------------
 client = genai.Client(api_key=GEMINI_API_KEY)
-
-MODEL_NAME = "gemini-3.5-flash"
 
 # -------------------------------------------------
 # Load spaCy
@@ -58,50 +56,49 @@ def clean_text(text):
 # Resume Information Extraction
 # -------------------------------------------------
 
-def extract_resume_information(resume_text):
+def extract_resume_information(resume_text, job_description, similarity_score):
     """
-    Extracts resume information using Gemini.
-
-    Returns:
-
-    {
-        "skills": [],
-        "experience": "",
-        "education": "",
-        "certifications": [],
-        "projects": []
-    }
+    Extracts structured resume information and generates
+    a short HR reasoning in ONE Gemini API call.
     """
 
     resume_text = clean_text(resume_text)
 
     prompt = f"""
-        You are an expert HR Resume Screening Assistant.
+    You are an expert HR Resume Screening Assistant.
 
-        Extract ONLY the following information.
+    Job Description:
+    {job_description}
 
-        Return ONLY valid JSON.
+    Semantic Similarity Score:
+    {similarity_score:.2f}
 
-        Format:
+    Resume:
+    {resume_text}
 
-        {{
-            "skills": [],
-            "experience": "",
-            "education": "",
-            "certifications": [],
-            "projects": []
-        }}
+    Analyze the resume.
 
-        Rules:
+    Return ONLY valid JSON.
 
-        - Return only JSON.
-        - Do not explain anything.
-        - Do not use markdown.
-        - Do not wrap JSON inside ```.
+    {{
+        "skills": [],
+        "experience": "",
+        "education": "",
+        "certifications": [],
+        "projects": [],
+        "reason": ""
+    }}
 
-        Resume:
+    Rules:
+    - Return valid JSON only.
+    - Do not use markdown.
+    - Do not wrap JSON inside ```.
 
-        {resume_text}
+    The "reason" should:
+    - Be under 60 words.
+    - Mention strengths.
+    - Mention missing skills (if any).
+    - Mention overall suitability.
     """
 
     try:
@@ -113,7 +110,6 @@ def extract_resume_information(resume_text):
 
         text = response.text.strip()
 
-        # Remove markdown if the model returns it
         text = re.sub(r"```json", "", text)
         text = re.sub(r"```", "", text)
         text = text.strip()
@@ -124,12 +120,13 @@ def extract_resume_information(resume_text):
 
     except Exception as e:
 
-        print(f"Gemini Extraction Error:\n{e}")
+        print(f"Gemini Error:\n{e}")
 
         return {
             "skills": [],
             "experience": "",
             "education": "",
             "certifications": [],
-            "projects": []
+            "projects": [],
+            "reason": "Reasoning could not be generated."
         }
