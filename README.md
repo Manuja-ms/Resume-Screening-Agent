@@ -26,8 +26,8 @@ The **AI Resume Screening Agent** is an AI-powered application that automates re
 ```text
 Resume-Screening-Agent/
 │
-├── app.py # Command-line application 
-├── streamlit_app.py # Streamlit frontend
+├── app.py                       # Command-line application 
+├── streamlit_app.py             # Streamlit frontend
 ├── config.py
 ├── requirements.txt
 ├── README.md
@@ -38,9 +38,10 @@ Resume-Screening-Agent/
 │   ├── similarity.py
 │   ├── scorer.py
 │   ├── ranker.py
-│   ├── reasoner.py
 │   └── exporter.py
 │
+│
+├── screenshots/
 ├── data/
 │   ├── resumes/
 │   ├── job_description/
@@ -55,7 +56,7 @@ Resume-Screening-Agent/
 ## 1. Clone the repository
 
 ```bash
-git clone <repository-url>
+git clone (https://github.com/Manuja-ms/Resume-Screening-Agent.git)
 cd Resume-Screening-Agent
 ```
 
@@ -75,12 +76,6 @@ conda activate resume_agent
 
 ```bash
 pip install -r requirements.txt
-```
-
-If you do not have a requirements file, install manually:
-
-```bash
-pip install streamlit pandas numpy scikit-learn sentence-transformers spacy google-genai PyPDF2 python-docx openpyxl
 ```
 
 Download the spaCy English model:
@@ -258,7 +253,6 @@ Each responsibility is separated into an independent module:
 * similarity.py → Semantic similarity
 * scorer.py → Candidate scoring
 * ranker.py → Ranking
-* reasoner.py → AI explanations
 * exporter.py → CSV/JSON export
 
 This design improves readability, maintainability, and testing.
@@ -285,7 +279,6 @@ Candidate ranking combines semantic similarity with extracted information such a
 * API usage requires a valid Google Gemini API key and internet connectivity.
 * OCR is not implemented for scanned PDF resumes.
 
-
 # Future Improvements
 
 * OCR support for scanned resumes
@@ -295,9 +288,6 @@ Candidate ranking combines semantic similarity with extracted information such a
 * Database integration
 * Candidate dashboard with analytics
 * Email notifications
-* Recruiter authentication
-* Interview recommendation module
-
 
 # Technologies Used
 
