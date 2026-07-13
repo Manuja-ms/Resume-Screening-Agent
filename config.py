@@ -1,14 +1,7 @@
 import os
 
-# ==============================
-# API Configuration
-# ==============================
-
 GEMINI_API_KEY = "YOUR_GEMINI_API_KEY"
-
-# ==============================
-# Folder Paths
-# ==============================
+MODEL_NAME = "gemini-3.5-flash"
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -20,15 +13,7 @@ JOB_DESCRIPTION_FILE = os.path.join(DATA_DIR, "job_description", "jd.txt")
 
 OUTPUT_FOLDER = os.path.join(DATA_DIR, "output")
 
-# ==============================
-# NLP Model
-# ==============================
-
 EMBEDDING_MODEL = "all-MiniLM-L6-v2"
-
-# ==============================
-# Output Files
-# ==============================
 
 CSV_OUTPUT = os.path.join(
     OUTPUT_FOLDER,
@@ -39,9 +24,5 @@ JSON_OUTPUT = os.path.join(
     OUTPUT_FOLDER,
     "ranked_candidates.json"
 )
-
-# ==============================
-# Supported Resume Formats
-# ==============================
 
 SUPPORTED_FORMATS = [".pdf", ".docx", ".txt"]
