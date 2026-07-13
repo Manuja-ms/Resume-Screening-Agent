@@ -23,8 +23,6 @@ from modules.ranker import (
     display_top_candidates
 )
 from modules.exporter import export_results
-from modules.reasoner import generate_reasoning
-
 
 def load_job_description():
 
@@ -58,11 +56,15 @@ def main():
 
         print(f"Processing {resume['filename']}")
 
-        extracted = extract_resume_information(resume["text"])
-
         similarity = calculate_similarity(
             jd,
             resume["text"]
+        )
+
+        extracted = extract_resume_information(
+            resume["text"],
+            jd,
+            similarity
         )
 
         score = calculate_final_score(
@@ -70,10 +72,9 @@ def main():
             similarity
         )
 
-        reason = generate_reasoning(
-            jd,
-            extracted,
-            similarity
+        reason = extracted.get(
+            "reason",
+            "Reasoning could not be generated."
         )
         
         candidate = {
@@ -83,7 +84,7 @@ def main():
             "Skills": extracted.get("skills", []),
             "Experience": extracted.get("experience", ""),
             "Education": extracted.get("education", ""),
-            "Reason": reason
+            "Reason": extracted.get("reason", "Reasoning could not be generated.")
         }
 
         candidates.append(candidate)
