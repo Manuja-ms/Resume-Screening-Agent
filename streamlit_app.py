@@ -8,7 +8,6 @@ from modules.extractor import extract_resume_information
 from modules.similarity import calculate_similarity
 from modules.scorer import calculate_final_score
 from modules.ranker import rank_candidates
-from modules.reasoner import generate_reasoning
 
 st.set_page_config(
     page_title="Resume Screening Agent",
@@ -57,11 +56,15 @@ if st.button("Screen Resumes"):
 
         resume_text = parse_resume(temp_path)
 
-        extracted = extract_resume_information(resume_text)
-
         similarity = calculate_similarity(
             job_description,
             resume_text
+        )
+
+        extracted = extract_resume_information(
+            resume_text,
+            job_description,
+            similarity
         )
 
         score = calculate_final_score(
@@ -69,10 +72,9 @@ if st.button("Screen Resumes"):
             similarity
         )
 
-        reason = generate_reasoning(
-            job_description,
-            extracted,
-            similarity
+        reason = extracted.get(
+            "reason",
+            "Reasoning could not be generated."
         )
 
         candidates.append({
